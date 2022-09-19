@@ -1,0 +1,414 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+#webchat {
+    max-width: 400px;
+    height: 91%;
+    font-size: 14px;
+}
+
+#webchat>*:focus-visible {
+    outline: none !important;
+    outline-width: 0 !important;
+    border: none;
+}
+
+.ariya-chat {
+    position: fixed;
+    height: 700px;
+    max-width: 400px;
+    bottom: 40px;
+    right: 40px;
+    z-index: 100;
+}
+
+.ariya-chat-popup {
+    border: 2px solid #7E8A97;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 78vh;
+    max-height: 600px;
+    max-width: 450px;
+    position: fixed;
+    bottom: 45px;
+    right: 45px;
+    background-color: #D6E3FF;
+}
+
+.ariya-chat input[type=text] {
+    border: 1px solid lightgrey !important;
+    background: white none repeat scroll 0% 0% !important;
+    padding-left: 10px !important;
+    border-radius: 30px !important;
+    height: 65% !important;
+}
+
+.fab-wrapper {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    max-width: 400px;
+}
+
+.fab-checkbox {
+    display: none;
+}
+
+.fab {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    box-shadow: 0px 5px 20px #81a4f1;
+    transition: all 0.3s ease;
+    z-index: 1;
+    border: 1px solid #0c50a7;
+}
+
+.fab:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.fab-checkbox:checked~.fab:before {
+    width: 90%;
+    height: 90%;
+    left: 5%;
+    top: 5%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.fab:hover {
+    background: #2c87e8;
+    box-shadow: 0px 5px 20px 5px #81a4f1;
+}
+
+.fab-checkbox:checked~.fab img {
+    height: 6px;
+    /* display: none; */
+}
+
+.fab .fab-dots-2 {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+}
+
+.fab-checkbox:checked~.fab .fab-dots-1 {
+    width: 32px;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+
+.fab-checkbox:checked~.fab .fab-dots-3 {
+    width: 32px;
+    border-radius: 10px;
+    right: 50%;
+    transform: translateX(50%) translateY(-50%) rotate(-45deg);
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.25;
+    }
+}
+
+.fab-checkbox:checked~.fab .fab-dots {
+    animation: none;
+}
+
+.fab-wheel {
+    height: 100%;
+    width: 385px;
+    transition: all 0.3s ease;
+    transform-origin: bottom right;
+    transform: scale(0);
+}
+
+.fab-checkbox:checked~.fab-wheel {
+    transform: scale(1);
+}
+
+.webchat__icon-button {
+    padding-left: 30px !important;
+    width: 80px !important;
+}
+
+.microphone-icon {
+    width: 13px;
+    height: 20px;
+    position: absolute;
+    bottom: 18px;
+    right: 54px;
+    z-index: 5;
+}
+
+.dot-elastic {
+    position: absolute;
+    bottom: 32px;
+    right: 55px;
+    width: 6px;
+    height: 6px;
+    border-radius: 5px;
+    background-color: #000066;
+    color: #000066;
+    animation: dotElastic 1s infinite linear;
+    z-index: 5;
+}
+
+.dot-elastic::before,
+.dot-elastic::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+}
+
+.dot-elastic::before {
+    left: -8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 5px;
+    background-color: #000066;
+    color: #000066;
+    animation: dotElasticBefore 1s infinite linear;
+}
+
+.dot-elastic::after {
+    left: 8px;
+    width: 6px;
+    height: 6px;
+    border-radius: 5px;
+    background-color: #000066;
+    color: #000066;
+    animation: dotElasticAfter 1s infinite linear;
+}
+
+@keyframes dotElasticBefore {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(1, 1.5);
+    }
+
+    50% {
+        transform: scale(1, 0.67);
+    }
+
+    75% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes dotElastic {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1, 1.5);
+    }
+
+    75% {
+        transform: scale(1, 1);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes dotElasticAfter {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1, 0.67);
+    }
+
+    75% {
+        transform: scale(1, 1.5);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.ariya-float-icon {
+    height: 3.5rem !important;
+    width: 3.5rem;
+}
+
+@media only screen and (max-width: 760px) {
+    .ariya-chat-popup {
+        right: -25px;
+        bottom: 30px;
+        max-width: 350px;
+    }
+
+    .ariya-chat {
+        max-width: 350px;
+    }
+
+    .fab-wrapper {
+        max-width: 350px;
+    }
+
+    .fab-wheel {
+        width: 350px;
+    }
+
+    .fab {
+        height: 3rem;
+        width: 3rem;
+        bottom: -2rem;
+        right: -2rem;
+    }
+
+    .ariya-float-icon {
+        height: 3rem !important;
+        width: 3rem;
+    }
+}
+
+.webchat__stacked-layout__avatar-gutter {
+    align-items: end !important;
+    flex-direction: row !important;
+}
+
+
+.webchat__bubble:not(.webchat__bubble--from-user) .webchat__bubble__content {
+    border-bottom-left-radius: 0px !important;
+}
+
+.webchat__bubble.webchat__bubble--from-user .webchat__bubble__content {
+    border-bottom-right-radius: 0px !important;
+}
+
+.webchat__icon-button:not(:disabled):not([aria-disabled="true"]):not(:active):hover .webchat__icon-button__shade {
+    background-color: transparent !important;
+}
+
+.webchat__icon-button:not(:disabled):not([aria-disabled="true"]):active .webchat__icon-button__shade {
+    background-color: transparent !important;
+}
+
+.webchat__bubble__content strong{
+    color: red !important;
+}
+
+img[alt*='download'] {
+    position: absolute;
+    bottom: 8px;
+    right: 15px;
+    height: 14px;
+    width: 15px !important;
+}
+
+img[alt*='expand'] {
+    position: absolute;
+    bottom: 8px;
+    right: 45px;
+    height: 14px;
+    width: 15px !important;
+}
+
+.webchat__bubble__content {
+    position: relative !important;
+}
+
+.image-zoom-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.80);
+    display: none;
+    top: 0px;
+    left: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-download-option {
+    position: absolute;
+    top: 15px;
+    right: 120px;
+    height: 17px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.zoom-out-option {
+    position: absolute;
+    top: 16px;
+    right: 85px;
+    height: 16px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.zoom-in-option {
+    position: absolute;
+    top: 16px;
+    right: 55px;
+    height: 16px;
+    width: 15px;
+    cursor: pointer;
+}
+
+.zoom-close-option {
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.webchat__send-box-text-box {
+    padding: 0px !important;
+}
+
+.ariya-chat input[type="text"] {
+    height: 55% !important;
+    margin-left: 10px !important;
+}
+
+.webchat__bubble__content div p {
+    margin: 0px !important;
+}
+
+.webchat__bubble__content div p img {
+    width: 100%;
+}
