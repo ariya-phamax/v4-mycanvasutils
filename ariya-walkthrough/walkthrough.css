@@ -41,7 +41,7 @@
   margin-top: -35px;
 }
 .close-btn{
-  background-color: #A02C37;
+  background-color: #000066;
   color: #fff;
   position: absolute;
   right: 0;
@@ -55,7 +55,7 @@
   cursor: pointer;
 }
 .close-btn:hover{
-  background-color: #F80000;
+  background-color: #838383;
   box-shadow: 2px 2px 2px black;
   color: white;
 }
@@ -102,7 +102,14 @@
 }
 
 #left-btn {
-  background-image: url("/ariya-walkthrough/left-arrow.svg");
+  background-image: url("/ariya-walkthrough/left-disabled-btn.svg");
+  cursor: auto;
+}
+#left-btn:hover {
+  /* background-image: url("/ariya-walkthrough/left-disabled-btn.svg"); */
+  cursor: disabled;
+  border: none;
+  box-shadow: none;
 }
 #left-btn-nav {
   background-image: url("/ariya-walkthrough/left-arrow.svg");
@@ -236,8 +243,9 @@
   height: 1.2rem;
 }
 #aav-highlight{
-  background-color: white;
+  background-color: #BCBBD5;
   padding: 1rem;
   border-radius: 1rem;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  box-shadow: 2px 2px 2px black;
 }

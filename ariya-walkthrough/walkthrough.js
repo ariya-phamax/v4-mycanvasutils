@@ -17,8 +17,8 @@ $(document).ready(function () {
   $("#right-btn-nav").click(function () {
     $(".navigation").removeClass("navbar-selected");
     $("#intro-nav").fadeOut();
-    $("#aav-class").addClass("aav-nav-selected");
-    $("#aav-selected-nav").fadeIn();
+    // $("#aav-class").addClass("aav-nav-selected");
+    // $("#aav-selected-nav").fadeIn();
   });
 
   $("#intro_03").click(function () {

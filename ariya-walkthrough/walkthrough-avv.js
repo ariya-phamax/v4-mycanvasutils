@@ -23,6 +23,7 @@ $(document).ready(function () {
       $('#aav-content').removeAttr('id');
       $('#making_of').get(0).pause()
       $("#aav-content-right").fadeOut();
+      $("#aav-highlight").removeAttr('id');
       $(".ariya-float-icon").click()
     }
 
@@ -33,5 +34,7 @@ $(document).ready(function () {
     })
 
 
-    $("#aav-content-right").delay(5000).fadeIn();
+    $("#aav-content-right").delay(10000).fadeIn("fast", function(){
+      $('#making_of').get(0).play()
+    });
 });
