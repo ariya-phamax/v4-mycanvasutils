@@ -243,9 +243,19 @@
   height: 1.2rem;
 }
 #aav-highlight{
+  width: 550px;
   background-color: #BCBBD5;
   padding: 1rem;
   border-radius: 1rem;
   /* border: 2px solid black; */
   box-shadow: 2px 2px 2px black;
+}
+#aav-highlight-icon{
+  position: absolute;
+  width: 60px;
+  z-index: 9999;
+  left: 0;
+  top: -24px;
+  right: 0;
+  margin: auto;
 }
