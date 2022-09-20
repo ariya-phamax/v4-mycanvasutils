@@ -253,7 +253,7 @@
 #aav-highlight-icon{
   position: absolute;
   width: 60px;
-  z-index: 9999;
+  /* z-index: 9999; */
   left: 0;
   top: -24px;
   right: 0;

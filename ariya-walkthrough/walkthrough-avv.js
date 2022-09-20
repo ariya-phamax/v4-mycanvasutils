@@ -25,6 +25,7 @@ $(document).ready(function () {
       $("#aav-content-right").fadeOut();
       $("#aav-highlight").removeAttr('id');
       $(".ariya-float-icon").click()
+      $(".close-btn").click()
     }
 
     $(".close-btn").click(function(){
