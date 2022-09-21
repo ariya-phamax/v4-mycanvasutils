@@ -1,9 +1,3 @@
-// let ariyaStyle = document.createElement('link');
-// ariyaStyle.setAttribute('rel', 'stylesheet');
-// ariyaStyle.setAttribute('type', 'text/css');
-// ariyaStyle.setAttribute('href', 'https://ariyav1-cdn.azureedge.net/ariya-cdn/floating-ariya.css');
-// document.head.appendChild(ariyaStyle);
-
 let ariyaStyle = document.createElement('link');
 ariyaStyle.setAttribute('rel', 'stylesheet');
 ariyaStyle.setAttribute('type', 'text/css');
@@ -37,78 +31,28 @@ function getLibrary(url, type, origin) {
     return promise;
 }
 
-const reactLib = [{
-    mapJs: 'https://unpkg.com/@babel/standalone@7.8.7/babel.min.js',
-    type: '',
-    origin: true
-}, {
-    mapJs: 'https://unpkg.com/react@16.8.6/umd/react.development.js',
-    type: '',
-    origin: true
-}, {
-    mapJs: 'https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js',
-    type: '',
-    origin: true
-}, {
-    mapJs: 'https://unpkg.com/react-redux@7.1.0/dist/react-redux.min.js',
-    type: '',
-    origin: true
-}, {
-    mapJs: 'https://cdn.botframework.com/botframework-webchat/latest/webchat.js',
-    type: '',
-    origin: true
-}, {
-    mapJs: '/embed-ariya/support.js',
-    type: 'text/babel',
-    origin: false
-}]
-
 const libraries = [{
     mapJs: 'https://aka.ms/csspeech/jsbrowserpackageraw',
     type: '',
     origin: false
 }, {
-    mapJs: 'https://unpkg.com/adaptivecards@1.2.6/dist/adaptivecards.min.js',
+    mapJs: 'https://cdn.botframework.com/botframework-webchat/latest/webchat.js',
     type: '',
-    origin: false
-}, {
-    mapJs: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js',
-    type: '',
-    origin: false
-}, {
-    mapJs: 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.js',
-    type: '',
-    origin: false
-}, {
-    mapJs: '/embed-ariya/abbreviation-content.js',
-    type: 'text/javascript',
-    origin: false
+    origin: true
 }];
 
 const loadLibrary = async function () {
     await Promise.all(libraries.map(async (lib, index) => {
         getLibrary(libraries[index].mapJs, libraries[index].type, libraries[index].origin)
     }));
-
-    await reactLib.reduce((p, lib) => {
-        return p.then(() => getLibrary(lib.mapJs, lib.type, lib.origin));
-    }, Promise.resolve());
-
 }
 
-loadLibrary().then(() => {
-    console.log('all library loaded')
-}).catch((error) => {
-    console.log('error', error);
-});
+loadLibrary();
 
 
 document.addEventListener('readystatechange', event => {
 
     if (event.target.readyState === "complete") {
-
-        // TO transpile the react code
-        window.dispatchEvent(new Event('DOMContentLoaded'));
 
         let floatingAriya = document.createElement('div');
         floatingAriya.setAttribute('id', 'ariyaChat');
@@ -133,7 +77,7 @@ document.addEventListener('readystatechange', event => {
             <div class="fab-wheel">
                 <a class="fab-action fab-action-1">
                     <div class="ariya-chat-popup">
-                        <img src="https://ariyav1-cdn.azureedge.net/images/new-chat-header.png" style="height: 9%; width: 100%;">
+                        <img src="https://ariyav1-cdn.azureedge.net/images/new-chat-header.png" style="height: 10%; width: 100%;">
                         <img id="speechToTextButton" src="https://ariyav1-cdn.azureedge.net/images/microphone.png" class="microphone-icon">
                         <div class="dot-elastic" id="animatedButton"></div>
                         <div id="webchat" role="main">
@@ -142,6 +86,66 @@ document.addEventListener('readystatechange', event => {
                 </a>
             </div>
         </div>`
+        const styleOptions = {
+            botAvatarImage: 'https://demo.ariya.ch/static/media/bot.11494d2a.png',
+            botAvatarInitials: 'AR',
+            userAvatarImage: 'https://ariyav1-cdn.azureedge.net/images/user-image.png',
+            userAvatarInitials: 'GU',
+            bubbleBackground: '#FFFFFF',
+            bubbleFromUserBackground: '#0070C0',
+            bubbleBorderRadius: 15,
+            bubbleFromUserBorderRadius: 15,
+            backgroundColor: '#D6E3FF',
+            bubbleTextColor: '#000',
+            bubbleFromUserTextColor: '#FFF',
+            sendBoxButtonColor: "rgb(0, 0, 102)",
+            sendBoxBackground: '#B4C1D8',
+            hideUploadButton: "true",
+            sendBoxHeight: 65,
+            microphoneButtonColorOnDictate: '#F33',
+            avatarSize: 24,
+        };
+        let incId = 0;
+
+        const store = window.WebChat.createStore(
+            {},
+            store => next => action => {
+                if (action.type === 'WEB_CHAT/SET_SEND_BOX') {
+                    const user_entered_text = action.payload.text;
+                }
+
+                if (action.type.toLowerCase() === 'DIRECT_LINE/INCOMING_ACTIVITY'.toLowerCase()) {
+                    if (incId == 0) {
+                        removeMainOutline();
+                    }
+
+                    removeMessageOutline();
+                    if (action.payload.activity.text) {
+
+                        if (action.payload.activity.text.includes("![QnAMaker]")) {
+                            let downloadAttrName = `download download-${incId}`;
+                            let expandAttrName = `expand expand-${incId}`;
+                            incId++;
+                            addImageControls(action, downloadAttrName, expandAttrName);
+                        }
+                    }
+                }
+                return next(action);
+            }
+        );
+
+        window.WebChat.renderWebChat(
+            {
+                directLine: window.WebChat.createDirectLine({
+                    token: window.location.pathname === "/what-is-aav/" ? 'WWcxnyvMpPU.4ai75HJaI6_sHpeCyaH5LZATXhaFEl2qfUfBVWZuAEk' :'6dAwcLUiDzY.48ZcdFjorzD3KpGQjpSnlb9jzxBfHCzCxAcVuFDpiBM'
+                }),
+                username: 'Ariya',
+                locale: 'en-US',
+                styleOptions,
+                store
+            },
+            document.getElementById('webchat')
+        );
 
         function Initialize(onComplete) {
             if (!!window.SpeechSDK) {
@@ -237,5 +241,114 @@ document.addEventListener('readystatechange', event => {
         function onCanceled(sender, cancellationEventArgs) {
             console.log('onCanceled', cancellationEventArgs)
         }
+
+        async function downloadImageContent(imageValue) {
+            const image = await fetch(imageValue);
+            const imageBlog = await image.blob()
+            const imageURL = URL.createObjectURL(imageBlog)
+
+            let el = document.createElement("a");
+            el.setAttribute("href", imageURL);
+            el.setAttribute("download", 'downloaded-image.png');
+            document.body.appendChild(el);
+            el.click();
+            document.body.removeChild(el);
+        }
+
+        function expandImageContent(imageValue) {
+            let zoomContainer = document.getElementById('imageZoom');
+            zoomContainer.style.display = 'flex';
+            let imageCont = document.getElementById('imageCont');
+            imageCont.src = imageValue;
+
+            let zoomDownloadOption = document.getElementById('zoomDownloadOption');
+            let zoomOutOption = document.getElementById('zoomOutOption');
+            let zoomInOption = document.getElementById('zoomInOption');
+            let zoomCloseOption = document.getElementById('zoomCloseOption');
+
+            zoomDownloadOption.addEventListener("click", function () {
+                downloadImageContent(imageValue);
+            });
+
+            zoomOutOption.addEventListener("click", function () {
+                zoomOut(imageCont)
+            });
+
+            zoomInOption.addEventListener("click", function () {
+                zoomIn(imageCont)
+            });
+
+            zoomCloseOption.addEventListener("click", function () {
+                closeZoom(zoomContainer);
+            });
+        }
+
+        function closeZoom(element) {
+            element.style.display = 'none';
+        }
+
+        function zoomIn(element) {
+            let currWidth = element.clientWidth;
+            if (currWidth >= 1300) return false;
+            else {
+                element.style.width = (currWidth + 100) + "px";
+            }
+        }
+
+        function zoomOut(element) {
+            let currWidth = element.clientWidth;
+            if (currWidth <= 300) return false;
+            else {
+                element.style.width = (currWidth - 100) + "px";
+            }
+        }
+
+        function addImageControls(action, downloadAttrName, expandAttrName) {
+            let imageUrl = getImageUrl(action.payload.activity.text);
+
+            action.payload.activity.text += `![${downloadAttrName}](https://ariyav1-cdn.azureedge.net/images/download.png)`;
+            action.payload.activity.text += `![${expandAttrName}](https://ariyav1-cdn.azureedge.net/images/expand-image.png)`;
+            setTimeout(() => {
+                let downloadElement = document.querySelector(`img[alt= ${CSS.escape(downloadAttrName)} ]`);
+                downloadElement.addEventListener("click", function () {
+                    downloadImageContent(imageUrl);
+                });
+
+                let expandElement = document.querySelector(`img[alt= ${CSS.escape(expandAttrName)}]`);
+                expandElement.addEventListener("click", function () {
+                    expandImageContent(imageUrl);
+                });
+            }, 500);
+        }
+
+        function getImageUrl(text) {
+            var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            let returnUrl;
+            text.replace(urlRegex, function (url) {
+                returnUrl = url;
+            });
+            return returnUrl;
+        }
+
+        function removeMainOutline() {
+            setTimeout(() => {
+                let outlineShadow = document.getElementsByClassName("webchat__basic-transcript__focus-indicator");
+                while (outlineShadow.length > 0) outlineShadow[0].remove();
+                let messageoutlineShadow = document.getElementsByClassName("webchat__basic-transcript__activity-indicator--focus");
+                while (messageoutlineShadow.length > 0) messageoutlineShadow[0].remove();
+            }, 500);
+        }
+
+        function removeMessageOutline() {
+            setTimeout(() => {
+                let messageoutlineShadow = document.getElementsByClassName("webchat__basic-transcript__activity-indicator--focus");
+                while (messageoutlineShadow.length > 0) messageoutlineShadow[0].remove();
+            }, 500);
+        }
+
     }
 });
+document.onload = function () {
+
+};
+

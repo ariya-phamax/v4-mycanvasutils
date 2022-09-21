@@ -192,7 +192,7 @@
   display: none;
     /* position: absolute; */
     left: 553px;
-    top: 10px;
+    top: 0;
     box-sizing: content-box;
     position: absolute;
     visibility: visible;
@@ -243,6 +243,7 @@
   height: 1.2rem;
 }
 #aav-highlight{
+  margin-top: 1rem;
   width: 550px;
   background-color: #BCBBD5;
   padding: 1rem;
@@ -258,4 +259,7 @@
   top: -24px;
   right: 0;
   margin: auto;
+}
+#aav-content-right>.intro-start-header-img{
+  width: 60px;
 }

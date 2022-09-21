@@ -8,9 +8,9 @@ body {
 }
 
 #webchat {
-    max-width: 400px;
+    max-width: 600px;
     height: 91%;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #webchat>*:focus-visible {
@@ -22,10 +22,10 @@ body {
 .ariya-chat {
     position: fixed;
     height: 700px;
-    max-width: 400px;
+    max-width: 600px;
     bottom: 40px;
     right: 40px;
-    z-index: 100;
+    z-index: 10000000;
 }
 
 .ariya-chat-popup {
@@ -41,13 +41,13 @@ body {
     background-color: #D6E3FF;
 }
 
-.ariya-chat input[type=text] {
-    border: 1px solid lightgrey !important;
-    background: white none repeat scroll 0% 0% !important;
-    padding-left: 10px !important;
-    border-radius: 30px !important;
-    height: 65% !important;
-}
+/* .ariya-chat input[type=text] { */
+    /* border: 1px solid lightgrey !important; */
+    /* background: white none repeat scroll 0% 0% !important; */
+    /* padding-left: 10px !important; */
+    /* border-radius: 30px !important; */
+    /* height: 65% !important; */
+/* } */
 
 .fab-wrapper {
     position: fixed;
@@ -132,7 +132,7 @@ body {
 
 .fab-wheel {
     height: 100%;
-    width: 385px;
+    width: 450px;
     transition: all 0.3s ease;
     transform-origin: bottom right;
     transform: scale(0);
@@ -400,15 +400,18 @@ img[alt*='expand'] {
     padding: 0px !important;
 }
 
-.ariya-chat input[type="text"] {
+/* .ariya-chat input[type="text"] {
+} */
+.webchat__send-box-text-box__input{
     height: 55% !important;
     margin-left: 10px !important;
-}
+        border: 1px solid lightgrey !important;
+    background: white none repeat scroll 0% 0% !important;
+    padding-left: 10px !important;
+    border-radius: 30px !important;
+    height: 65% !important;
 
-.webchat__bubble__content div p {
-    margin: 0px !important;
 }
-
-.webchat__bubble__content div p img {
-    width: 100%;
+.ac-textBlock>p{
+    font-size: 14px !important;
 }
