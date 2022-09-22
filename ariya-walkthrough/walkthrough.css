@@ -191,7 +191,7 @@
 #aav-content-right{
   display: none;
     /* position: absolute; */
-    left: 553px;
+    left: 577px;
     top: 0;
     box-sizing: content-box;
     position: absolute;
@@ -262,4 +262,10 @@
 }
 #aav-content-right>.intro-start-header-img{
   width: 60px;
+}
+.aav-text-light{
+  background-color: #fff;
+  text-decoration: underline;
+  border-radius: 1rem;
+  padding: 1rem;
 }

@@ -32,6 +32,7 @@ $(document).ready(function () {
       $(".close").fadeOut();
       $('#making_of').get(0).pause()
       $("#aav-highlight").removeAttr('id');
+      $(".aav-text-light").removeAttr('class');
     })
 
 
