@@ -1,0 +1,31 @@
+Steps for Custom UI for Azure B2C Login Screen.
+
+1. Create a new user flow or use existing user flow
+2. Under Page Layouts, select the Layout name and set Use custom page content to Yes
+3. Under Custom Page URI, provide the URL to the HTML page (Hosted or preferably stored in Azure Storage Accounts)
+
+Storage Account steps:
+
+1. Create a new container or choose an existing container
+2. Add the HTML files and images to a folder and upload to storage container
+3. Under, Resource Sharing set the CORS to * or Provide the domain of your tenant (For eg: https://ariyaai.b2clogin.com/)
+4. Change the access level to the appropriate settings (We have provided Anonymous access)
+
+
+Notes:
+
+1. Azure B2C supports JQuery (Can be used to manipulate the css, make API calls, etc..)
+2. <div id='api'> is the component provided by B2C which included all the input fields and submit button( Can be manipulated using scripts)
+3. Handlebars can be used for templating if required
+4. Make sure to follow the versions of Jquery and Handlebars supported to relevant B2C version (Refer: https://learn.microsoft.com/en-us/azure/active-directory-b2c/page-layout)
+
+
+Citations:
+
+https://medium.com/the-new-control-plane/using-javascript-in-azure-ad-b2c-ui-customisation-6962c0991ea2
+https://learn.microsoft.com/en-us/azure/active-directory-b2c/javascript-and-page-layout?pivots=b2c-user-flow
+https://learn.microsoft.com/en-us/azure/active-directory-b2c/page-layout
+https://learn.microsoft.com/en-us/azure/active-directory-b2c/customize-ui-with-html?pivots=b2c-user-flow
+https://www.youtube.com/watch?v=Bs3GjMXZnE0
+
+
